@@ -14,7 +14,7 @@ import java.util.Map;
 public abstract class Message implements Serializable {
 
     // 根据消息类型，获取对应消息类
-    public Class<?> getMessageClass(int messageType){
+    public static Class<?> getMessageClass(int messageType){
         return messageClasses.get(messageType);
     }
 
@@ -28,7 +28,8 @@ public abstract class Message implements Serializable {
     public static final int RpcRequestMessage = 101;
     public static final int RpcResponseMessage = 102;
 
-    public static Map<Integer, Class<?>> messageClasses = new HashMap<>();
+    // 通过消息的类型，获取对应的 Class 对象
+    private static Map<Integer, Class<?>> messageClasses = new HashMap<>();
     static {
         messageClasses.put(RpcRequestMessage, RpcRequestMessage.class);
         messageClasses.put(RpcResponseMessage, RpcResponseMessage.class);
